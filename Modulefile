@@ -1,4 +1,4 @@
-name        'drush'
+name        'puppet-drush'
 version     '0.0.1'
 source      'https://github.com/jvc26/puppet-drush.git'
 license     'Apache License, Version 2.0'
