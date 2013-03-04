@@ -25,10 +25,6 @@ class drush {
 
     include drush::params
 
-    package {['git', 'php5-cli', 'php-pear'] :
-        ensure => present,
-    }
-
     package { 'Console_Table':
         ensure   => present,
         provider => pear,
