@@ -30,7 +30,7 @@ class drush {
         provider => pear,
         require  => Package['php-pear'],
     }
-    package { 'drush':
+    package { 'drush/drush':
         ensure   => present,
         provider => pear,
         require  => Package['Console_Table'],
