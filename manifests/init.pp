@@ -28,12 +28,20 @@ class drush {
     package { 'Console_Table':
         ensure   => present,
         provider => pear,
-        require  => Package['php-pear'],
+        require  => [Package['php-pear'],Exec["discover-drush-channel"]],
     }
     package { 'drush/drush':
         ensure   => present,
         provider => pear,
-        require  => Package['Console_Table'],
+        require  => [Package['Console_Table'], Exec["discover-drush-channel"]],
     }
+    exec {"discover-drush-channel" :
+      command => 'pear channel-discover pear.drush.org',
+      path => "/bin:/usr/bin:/usr/sbin",
+      unless => "locate /usr/share/pear/drush/drush.php",
+    }
+    
 
+
+    
 }
