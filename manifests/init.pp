@@ -23,25 +23,12 @@
 #
 class drush {
 
-    include drush::params
+  include drush::params
 
-    package { 'Console_Table':
-        ensure   => present,
-        provider => pear,
-        require  => [Package['php-pear'],Exec["discover-drush-channel"]],
-    }
-    package { 'drush/drush':
-        ensure   => present,
-        provider => pear,
-        require  => [Package['Console_Table'], Exec["discover-drush-channel"]],
-    }
-    exec {"discover-drush-channel" :
-      command => 'pear channel-discover pear.drush.org',
-      path => "/bin:/usr/bin:/usr/sbin",
-      unless => "locate /usr/share/pear/drush/drush.php",
-    }
-    
+  exec {"install_drush" :
+    command => 'wget -O /usr/bin/drush http://files.drush.org/drush.phar; chmod 755 /usr/bin/drush',
+    path => "/bin:/usr/bin:/usr/sbin",
+    unless => "locate /usr/bin/drush",
+  }
 
-
-    
 }
